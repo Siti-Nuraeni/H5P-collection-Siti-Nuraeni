@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H5P Portfolio — Life Management Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbf7f0;
+    --panel:#ffffff;
+    --ink:#221f26;
+    --muted:#6d6a72;
+    --line:rgba(34,31,38,0.09);
+
+    --coral:#ff6b4a;
+    --coral-soft:#ffe4da;
+    --teal:#0f9d8f;
+    --teal-soft:#d9f3ee;
+    --gold:#f0a93a;
+    --gold-soft:#fdecc8;
+    --violet:#7c6cf0;
+    --violet-soft:#e8e4fd;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.disp{
+    font-family:'Fraunces',serif;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    position:relative;
+    padding:6rem 6vw 4.5rem;
+    overflow:hidden;
+    background:
+      radial-gradient(620px 380px at 88% -10%, rgba(255,107,74,0.16), transparent 70%),
+      radial-gradient(520px 420px at 8% 110%, rgba(15,157,143,0.14), transparent 70%),
+      var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    opacity:0.55;
+  }
+  .blob.b1{width:14px;height:14px;background:var(--coral);top:18%;right:14%;}
+  .blob.b2{width:9px;height:9px;background:var(--gold);top:62%;right:22%;}
+  .blob.b3{width:11px;height:11px;background:var(--teal);top:40%;right:6%;}
+  .blob.b4{width:7px;height:7px;background:var(--violet);top:78%;right:10%;}
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+    font-size:.75rem;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:1.5rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:2px;
+    border-radius:2px;
+    background:var(--coral);
+    display:inline-block;
+  }
+  header.hero h1{
+    font-weight:600;
+    font-size:clamp(2.5rem, 5vw, 4.2rem);
+    max-width:15ch;
+    margin:0 0 1.3rem;
+    color:var(--ink);
+  }
+  header.hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--coral);
+  }
+  header.hero p.byline{
+    margin:0 0 1.5rem;
+    font-size:.95rem;
+    color:var(--muted);
+  }
+  header.hero p.byline strong{
+    color:var(--ink);
+    font-weight:600;
+  }
+  header.hero p.lede{
+    max-width:56ch;
+    font-size:1.1rem;
+    color:var(--muted);
+    margin:0 0 2.6rem;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1rem;
+  }
+  .stat{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:.9rem 1.3rem;
+    box-shadow:0 6px 18px -12px rgba(34,31,38,0.18);
+  }
+  .stat .num{font-family:'Fraunces',serif; font-weight:600; font-size:1.5rem; color:var(--coral); display:block; line-height:1.1;}
+  .stat .lab{font-size:.72rem; color:var(--muted); letter-spacing:.06em; text-transform:uppercase;}
+
+  /* ---------- Nav pills ---------- */
+  nav.jump{
+    display:flex;
+    gap:.6rem;
+    flex-wrap:wrap;
+    padding:1.6rem 6vw;
+    max-width:1280px;
+    margin:0 auto;
+  }
+  nav.jump a{
+    text-decoration:none;
+    font-size:.82rem;
+    font-weight:600;
+    padding:.5rem 1rem;
+    border-radius:100px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--ink);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  nav.jump a:hover{transform:translateY(-2px); box-shadow:0 10px 20px -14px rgba(34,31,38,0.3);}
+  nav.jump a.c-examples{border-color:var(--coral);}
+  nav.jump a.c-case{border-color:var(--teal);}
+  nav.jump a.c-exercise{border-color:var(--gold);}
+
+  /* ---------- Section shell ---------- */
+  section.group{
+    padding:3.2rem 6vw 1rem;
+    max-width:1280px;
+    margin:0 auto;
+    scroll-margin-top:1.5rem;
+  }
+  .group-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1rem;
+    margin-bottom:2.2rem;
+  }
+  .group-head .kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    margin-bottom:.5rem;
+  }
+  .kicker .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .group-head h2{
+    font-size:1.9rem;
+    font-weight:600;
+    margin:0;
+    color:var(--ink);
+  }
+  .group-head .tag{
+    font-size:.85rem;
+    color:var(--muted);
+    max-width:44ch;
+  }
+
+  #examples .kicker{color:var(--coral);} #examples .dot{background:var(--coral);}
+  #case-studies .kicker{color:var(--teal);} #case-studies .dot{background:var(--teal);}
+  #exercise .kicker{color:var(--gold);} #exercise .dot{background:var(--gold);}
+
+  /* ---------- Cards ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(290px,1fr));
+    gap:1.3rem;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:1.6rem 1.5rem 1.4rem;
+    display:flex;
+    flex-direction:column;
+    gap:.85rem;
+    position:relative;
+    box-shadow:0 4px 14px -10px rgba(34,31,38,0.12);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 34px -18px rgba(34,31,38,0.28);
+  }
+  .card.coral:hover{border-color:var(--coral);}
+  .card.teal:hover{border-color:var(--teal);}
+  .card.gold:hover{border-color:var(--gold);}
+
+  .card-top{display:flex; align-items:center; justify-content:space-between;}
+  .idx{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:.72rem;
+    letter-spacing:.06em;
+    padding:.25rem .55rem;
+    border-radius:100px;
+  }
+  .coral .idx{background:var(--coral-soft); color:#c8471f;}
+  .teal .idx{background:var(--teal-soft); color:#0a6a60;}
+  .gold .idx{background:var(--gold-soft); color:#93650f;}
+
+  .card h3{
+    margin:0;
+    font-size:1.24rem;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.32;
+  }
+  .card p{
+    margin:0;
+    color:var(--muted);
+    font-size:.91rem;
+  }
+  .skill-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem;
+    margin-top:.1rem;
+  }
+  .pill{
+    font-size:.68rem;
+    font-weight:600;
+    padding:.28rem .6rem;
+    border-radius:100px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    color:var(--muted);
+  }
+  .card .open{
+    margin-top:auto;
+    padding-top:.85rem;
+    border-top:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .open a{
+    text-decoration:none;
+    font-size:.87rem;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .coral .open a{color:var(--coral);}
+  .teal .open a{color:var(--teal);}
+  .gold .open a{color:#b57c14;}
+  .open a svg{width:13px;height:13px;transition:transform .2s;}
+  .open a:hover svg{transform:translate(2px,-2px);}
+  .open .fmt{font-size:.68rem; color:var(--muted); font-weight:600;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:4.5rem;
+    padding:2.6rem 6vw 3.2rem;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1rem;
+    color:var(--muted);
+    font-size:.82rem;
+  }
+  footer strong{color:var(--ink); font-weight:600;}
+
+  @media (max-width:640px){
+    header.hero{padding:4rem 6vw 3rem;}
+    section.group{padding:2.4rem 6vw 0.5rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span>
+  <span class="eyebrow">Instructional Design Portfolio</span>
+  <h1>Interactive learning built for <em>real life</em></h1>
+  <p class="byline">By <strong>Siti Nuraeni</strong></p>
+  <p class="lede">A collection of H5P activities designed for a Life Management Science curriculum — scenario-based examples, case studies, and guided exercises that help learners practise the skills of healthy relationships, emotional wellbeing, and everyday decision-making.</p>
+  <div class="hero-meta">
+    <div class="stat"><span class="num">16</span><span class="lab">Activities</span></div>
+    <div class="stat"><span class="num">3</span><span class="lab">Formats</span></div>
+    <div class="stat"><span class="num">H5P</span><span class="lab">Authoring tool</span></div>
+    <div class="stat"><span class="num">01</span><span class="lab">Life Mgmt. Science</span></div>
+  </div>
+</header>
+
+<nav class="jump">
+  <a class="c-examples" href="#examples">Scenario Examples (9)</a>
+  <a class="c-case" href="#case-studies">Case Studies (4)</a>
+  <a class="c-exercise" href="#exercise">Guided Exercises (4)</a>
+</nav>
+
+<section class="group" id="examples">
+  <div class="group-head">
+    <div>
+      <span class="kicker"><span class="dot"></span>Scenario Examples</span>
+      <h2>Modeled dialogues &amp; mini-scenarios</h2>
+    </div>
+    <span class="tag">Show learners what a skill looks like in practice, in relationships, habits, and everyday mindset, before they attempt it themselves.</span>
+  </div>
+  <div class="grid">
+
+    <div class="card coral">
+      <div class="card-top"><span class="idx">EX · 01</span></div>
+      <h3>Giving Intentional Efforts</h3>
+      <p>Models small, deliberate acts of care in a relationship, framing "effort" as visible, repeatable behavior rather than an abstract feeling.</p>
+      <div class="skill-row"><span class="pill">Relationships</span><span class="pill">Habits</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1292841578730967689" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card coral">
+      <div class="card-top"><span class="idx">EX · 02</span></div>
+      <h3>Practicing Assertive Communication</h3>
+      <p>Contrasts passive, aggressive, and assertive responses in a difficult conversation, giving learners a model script for stating needs clearly.</p>
+      <div class="skill-row"><span class="pill">Communication</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1292779004783119529" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card coral">
+      <div class="card-top"><span class="idx">EX · 03</span></div>
+      <h3>Setting Boundaries With Comfort Objects</h3>
+      <p>Illustrates a concrete strategy for expressing and holding personal boundaries, giving learners language for a topic that's often hard to name.</p>
+      <div class="skill-row"><span class="pill">Boundaries</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1292832541135247009" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card coral">
+      <div class="card-top"><span class="idx">EX · 04</span></div>
+      <h3>Ways to Discuss Emotions After a Breakup</h3>
+      <p>Presents constructive language options for processing and voicing emotion after a breakup, moving learners from reactive statements to reflective ones.</p>
+      <div class="skill-row"><span class="pill">Emotional literacy</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1291988933296913569" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card coral">
+      <div class="card-top"><span class="idx">EX · 05</span></div>
+      <h3>Social Media Habits and Its Impacts</h3>
+      <p>Walks learners through everyday social media patterns and their effects on mood and time, building awareness before asking learners to reflect on their own habits.</p>
+      <div class="skill-row"><span class="pill">Digital habits</span><span class="pill">Self-awareness</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1291867623990780159" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card coral">
+      <div class="card-top"><span class="idx">EX · 06</span></div>
+      <h3>Celebrating Others' Success</h3>
+      <p>Models genuine, generous responses to someone else's good news, helping learners replace comparison or quiet envy with authentic support.</p>
+      <div class="skill-row"><span class="pill">Social skills</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1291867691104750099" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card coral">
+      <div class="card-top"><span class="idx">EX · 07</span></div>
+      <h3>Shifting to Gratitude</h3>
+      <p>Demonstrates how to reframe a frustrating moment into a gratitude-oriented one, giving learners a repeatable mental shift they can apply on their own.</p>
+      <div class="skill-row"><span class="pill">Mindset</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1291867719957800109" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card coral">
+      <div class="card-top"><span class="idx">EX · 08</span></div>
+      <h3>Embracing Self-Care</h3>
+      <p>Shows a learner recognizing burnout signs and choosing a self-care response, framing self-care as a practical routine rather than a vague ideal.</p>
+      <div class="skill-row"><span class="pill">Wellbeing</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1291989064878445319" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="group" id="case-studies">
+  <div class="group-head">
+    <div>
+      <span class="kicker"><span class="dot"></span>Case Studies</span>
+      <h2>Longer situations to analyze</h2>
+    </div>
+    <span class="tag">Multi-part narratives that ask learners to weigh trade-offs, spot patterns, and propose their own resolution.</span>
+  </div>
+  <div class="grid">
+
+    <div class="card teal">
+      <div class="card-top"><span class="idx">CS · 01</span></div>
+      <h3>Building Fair Household Routines</h3>
+      <p>Asks learners to evaluate an uneven division of chores in a household scenario and design a fairer, sustainable routine for everyone involved.</p>
+      <div class="skill-row"><span class="pill">Fairness</span><span class="pill">Roles</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1292842215255391259" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card teal">
+      <div class="card-top"><span class="idx">CS · 02</span></div>
+      <h3>Strengthening Nighttime Connection</h3>
+      <p>Examines a couple's fading evening routine and prompts learners to identify small, repeatable rituals that rebuild closeness at day's end.</p>
+      <div class="skill-row"><span class="pill">Connection</span><span class="pill">Ritual</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1292842253636174209" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card teal">
+      <div class="card-top"><span class="idx">CS · 03</span></div>
+      <h3>Stacey's Transformative Journey</h3>
+      <p>Follows a personal growth narrative over time, asking learners to trace the turning points and decisions behind a meaningful change.</p>
+      <div class="skill-row"><span class="pill">Personal growth</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1292224253990816099" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card teal">
+      <div class="card-top"><span class="idx">CS · 04</span></div>
+      <h3>Samantha's Binge Eating</h3>
+      <p>A sensitive case study asking learners to recognize the signs of a struggling friend and identify supportive, non-judgmental responses that point toward professional help.</p>
+      <div class="skill-row"><span class="pill">Wellbeing</span><span class="pill">Support skills</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1292224253827894119" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="group" id="exercise">
+  <div class="group-head">
+    <div>
+      <span class="kicker"><span class="dot"></span>Guided Exercises</span>
+      <h2>Hands-on practice</h2>
+    </div>
+    <span class="tag">Tasks where learners apply a skill directly, generating and testing their own responses rather than analyzing someone else's.</span>
+  </div>
+  <div class="grid">
+
+    <div class="card gold">
+      <div class="card-top"><span class="idx">PR · 01</span></div>
+      <h3>Expressing Love Daily</h3>
+      <p>Has learners generate and rank small, specific ways to express care each day, turning a broad value into daily, doable actions.</p>
+      <div class="skill-row"><span class="pill">Daily habits</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1292841637368775729" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card gold">
+      <div class="card-top"><span class="idx">PR · 02</span></div>
+      <h3>Dealing with Stress</h3>
+      <p>Guides learners through identifying personal stress triggers and selecting a practical coping response they can apply the same day.</p>
+      <div class="skill-row"><span class="pill">Stress management</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1291862248376411309" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card gold">
+      <div class="card-top"><span class="idx">PR · 03</span></div>
+      <h3>Identifying Cognitive Reappraisal Techniques</h3>
+      <p>Has learners practice spotting and reframing unhelpful thought patterns, building a repeatable technique for managing difficult moments.</p>
+      <div class="skill-row"><span class="pill">Cognitive skills</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1291862387054456609" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+    <div class="card gold">
+      <div class="card-top"><span class="idx">PR · 04</span></div>
+      <h3>Planning Behavior Change</h3>
+      <p>Walks learners through mapping out a personal behavior-change plan step by step, from motivation to a concrete first action.</p>
+      <div class="skill-row"><span class="pill">Goal setting</span></div>
+      <div class="open">
+        <a href="https://ilmsactivities.h5p.com/content/1291862487941820079" target="_blank" rel="noopener">View activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <span class="fmt">H5P</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div>Designed by <strong>Siti Nuraeni</strong> · Built with <strong>H5P</strong> for a Life Management Science curriculum.</div>
+  <div>Portfolio compiled July 2026.</div>
+</footer>
+
+</body>
+</html>
